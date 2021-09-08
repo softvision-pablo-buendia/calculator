@@ -37,7 +37,7 @@ class CalculatorControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string("Calculator available"));
+                .andExpect(content().string("10"));
 
     }
 }
