@@ -29,7 +29,7 @@ class CalculatorControllerTest {
     }
 
     @Test
-    void calculate() throws Exception {
+    void calculateAddition() throws Exception {
         mockMvc.perform(get("/calculator/calculate")
                 .param("number1", "5")
                 .param("number2", "5")
@@ -37,7 +37,57 @@ class CalculatorControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string("10"));
+                .andExpect(content().string("10.0"));
 
     }
+
+    @Test
+    void calculateSubtraction() throws Exception {
+        mockMvc.perform(get("/calculator/calculate")
+                .param("number1", "15")
+                .param("number2", "8")
+                .param("expression", "-")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().string("7.0"));
+    }
+
+    @Test
+    void calculateMultiplication() throws Exception {
+        mockMvc.perform(get("/calculator/calculate")
+                .param("number1", "5")
+                .param("number2", "5")
+                .param("expression", "*")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().string("25.0"));
+
+    }
+
+    @Test
+    void calculateDivision() throws Exception {
+        mockMvc.perform(get("/calculator/calculate")
+                .param("number1", "15")
+                .param("number2", "5")
+                .param("expression", "/")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().string("3.0"));
+    }
+
+    @Test
+    void testFailWithWrongExpression() throws Exception {
+        mockMvc.perform(get("/calculator/calculate")
+                .param("number1", "15")
+                .param("number2", "5")
+                .param("expression", "qwe")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().string("3.0"));
+    }
+
 }

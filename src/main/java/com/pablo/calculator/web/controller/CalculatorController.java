@@ -13,6 +13,25 @@ public class CalculatorController {
 
     @GetMapping("/calculate")
     public String calculate(@RequestParam String number1, @RequestParam String number2, @RequestParam String expression) {
-        return "10";
+        double operand1 = Double.parseDouble(number1);
+        double operand2 = Double.parseDouble(number2);
+
+        double result = getResult(expression, operand1, operand2);
+
+        return Double.toString(result);
+    }
+
+    private double getResult(String expression, double operand1, double operand2) {
+        switch (expression) {
+            case "+":
+                return operand1 + operand2;
+            case "-":
+                return operand1 - operand2;
+            case "*":
+                return operand1 * operand2;
+            case "/":
+                return operand1 / operand2;
+        }
+        return 0;
     }
 }
