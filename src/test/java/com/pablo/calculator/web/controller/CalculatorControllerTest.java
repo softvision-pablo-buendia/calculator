@@ -1,13 +1,17 @@
 package com.pablo.calculator.web.controller;
 
+import com.pablo.calculator.web.service.CalculatorService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -16,8 +20,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest
 class CalculatorControllerTest {
 
+    @MockBean
+    CalculatorService calculatorService;
+
     @Autowired
     MockMvc mockMvc;
+
+    @BeforeEach
+    void prepareTest() {
+        when(calculatorService.calculate(5, 5, "+")).thenReturn(10.0);
+        when(calculatorService.calculate(15, 8, "-")).thenReturn(7.0);
+        when(calculatorService.calculate(5, 5, "*")).thenReturn(25.0);
+        when(calculatorService.calculate(15, 5, "/")).thenReturn(3.0);
+    }
 
     @Test
     void getCalculator() throws Exception {

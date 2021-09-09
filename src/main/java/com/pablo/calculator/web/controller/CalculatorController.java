@@ -1,10 +1,20 @@
 package com.pablo.calculator.web.controller;
 
-import org.springframework.web.bind.annotation.*;
+import com.pablo.calculator.web.service.CalculatorService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/calculator")
 public class CalculatorController {
+
+    public final CalculatorService calculatorService;
+
+    public CalculatorController(CalculatorService calculatorService) {
+        this.calculatorService = calculatorService;
+    }
 
     @GetMapping
     public String getCalculator() {
@@ -21,23 +31,12 @@ public class CalculatorController {
         } catch (NumberFormatException e) {
             throw new NotAValidNumberException();
         }
+        if (!(expression.equals("+") || expression.equals("-") || expression.equals("*") || expression.equals("/"))) {
+            throw new NotAValidExpressionException();
+        }
 
-        double result = getResult(expression, operand1, operand2);
+        double result = calculatorService.calculate(operand1, operand2, expression);
 
         return Double.toString(result);
-    }
-
-    private double getResult(String expression, double operand1, double operand2) {
-        switch (expression) {
-            case "+":
-                return operand1 + operand2;
-            case "-":
-                return operand1 - operand2;
-            case "*":
-                return operand1 * operand2;
-            case "/":
-                return operand1 / operand2;
-        }
-        throw new NotAValidExpressionException();
     }
 }
