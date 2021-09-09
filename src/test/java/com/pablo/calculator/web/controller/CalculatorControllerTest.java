@@ -85,9 +85,27 @@ class CalculatorControllerTest {
                 .param("number2", "5")
                 .param("expression", "qwe")
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string("3.0"));
+                .andExpect(status().isBadRequest());
     }
 
+
+    @Test
+    void testFailWithWrongNumber1() throws Exception {
+        mockMvc.perform(get("/calculator/calculate")
+                .param("number1", "qwe")
+                .param("number2", "5")
+                .param("expression", "+")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testFailWithWrongNumber2() throws Exception {
+        mockMvc.perform(get("/calculator/calculate")
+                .param("number1", "15")
+                .param("number2", "qwe")
+                .param("expression", "+")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
 }

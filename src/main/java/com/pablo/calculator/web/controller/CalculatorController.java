@@ -13,8 +13,14 @@ public class CalculatorController {
 
     @GetMapping("/calculate")
     public String calculate(@RequestParam String number1, @RequestParam String number2, @RequestParam String expression) {
-        double operand1 = Double.parseDouble(number1);
-        double operand2 = Double.parseDouble(number2);
+        double operand1 = 0;
+        double operand2 = 0;
+        try {
+            operand1 = Double.parseDouble(number1);
+            operand2 = Double.parseDouble(number2);
+        } catch (NumberFormatException e) {
+            throw new NotAValidNumberException();
+        }
 
         double result = getResult(expression, operand1, operand2);
 
@@ -32,6 +38,6 @@ public class CalculatorController {
             case "/":
                 return operand1 / operand2;
         }
-        return 0;
+        throw new NotAValidExpressionException();
     }
 }
