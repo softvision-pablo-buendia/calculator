@@ -1,4 +1,4 @@
-package com.pablo.calculator.web.controller;
+package com.pablo.calculator.web.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

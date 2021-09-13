@@ -1,4 +1,4 @@
-package com.pablo.calculator.web.controller;
+package com.pablo.calculator.web.model;
 
 import java.math.BigInteger;
 import java.util.List;

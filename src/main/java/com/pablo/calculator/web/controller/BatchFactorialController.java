@@ -1,6 +1,7 @@
 package com.pablo.calculator.web.controller;
 
 import com.pablo.calculator.web.model.FactorialDto;
+import com.pablo.calculator.web.model.FactorialRunnable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

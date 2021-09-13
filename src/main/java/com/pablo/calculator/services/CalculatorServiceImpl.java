@@ -1,4 +1,4 @@
-package com.pablo.calculator.web.service;
+package com.pablo.calculator.services;
 
 import org.springframework.stereotype.Service;
 
