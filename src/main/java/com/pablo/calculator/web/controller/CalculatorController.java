@@ -1,6 +1,8 @@
 package com.pablo.calculator.web.controller;
 
-import com.pablo.calculator.web.service.CalculatorService;
+import com.pablo.calculator.services.CalculatorService;
+import com.pablo.calculator.web.exceptions.NotAValidExpressionException;
+import com.pablo.calculator.web.exceptions.NotAValidNumberException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;

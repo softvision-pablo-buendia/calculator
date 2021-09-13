@@ -1,6 +1,6 @@
 package com.pablo.calculator.web.controller;
 
-import com.pablo.calculator.web.service.CalculatorService;
+import com.pablo.calculator.services.CalculatorService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
